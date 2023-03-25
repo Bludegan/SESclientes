@@ -7,6 +7,7 @@ import ConexionBD.IConexionBD;
 import Negocio.Usuario;
 import java.sql.*;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -63,21 +64,26 @@ DefaultTableModel modelo;
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu Empleados (1).png"))); // NOI18N
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, -1, 80));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, -1, 80));
 
         Btn_Guardar.setBackground(new java.awt.Color(252, 178, 1));
-        Btn_Guardar.setForeground(new java.awt.Color(255, 255, 255));
+        Btn_Guardar.setFont(new java.awt.Font("Arimo", 1, 18)); // NOI18N
+        Btn_Guardar.setForeground(new java.awt.Color(49, 54, 56));
+        Btn_Guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-guardar-30.png"))); // NOI18N
         Btn_Guardar.setText("Guardar");
         Btn_Guardar.setBorder(null);
+        Btn_Guardar.setBorderPainted(false);
         Btn_Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_GuardarActionPerformed(evt);
             }
         });
-        add(Btn_Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 190, 110, 40));
+        add(Btn_Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 170, 170, 40));
 
         Btn_Cancelar.setBackground(new java.awt.Color(252, 178, 1));
-        Btn_Cancelar.setForeground(new java.awt.Color(255, 255, 255));
+        Btn_Cancelar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        Btn_Cancelar.setForeground(new java.awt.Color(49, 54, 56));
+        Btn_Cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-cancelar-2-30.png"))); // NOI18N
         Btn_Cancelar.setText("Cancelar");
         Btn_Cancelar.setBorder(null);
         Btn_Cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -85,21 +91,25 @@ DefaultTableModel modelo;
                 Btn_CancelarActionPerformed(evt);
             }
         });
-        add(Btn_Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 360, 110, 40));
+        add(Btn_Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 320, 170, 40));
 
         Btn_Editar.setBackground(new java.awt.Color(252, 178, 1));
-        Btn_Editar.setForeground(new java.awt.Color(255, 255, 255));
-        Btn_Editar.setText("Editar");
+        Btn_Editar.setFont(new java.awt.Font("Arimo", 1, 18)); // NOI18N
+        Btn_Editar.setForeground(new java.awt.Color(49, 54, 56));
+        Btn_Editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-editar-fila-30.png"))); // NOI18N
+        Btn_Editar.setText(" Editar");
         Btn_Editar.setBorder(null);
         Btn_Editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_EditarActionPerformed(evt);
             }
         });
-        add(Btn_Editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 250, 110, 40));
+        add(Btn_Editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 220, 170, 40));
 
         Btn_Eliminar.setBackground(new java.awt.Color(252, 178, 1));
-        Btn_Eliminar.setForeground(new java.awt.Color(255, 255, 255));
+        Btn_Eliminar.setFont(new java.awt.Font("Arimo", 1, 18)); // NOI18N
+        Btn_Eliminar.setForeground(new java.awt.Color(49, 54, 56));
+        Btn_Eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-eliminar-30.png"))); // NOI18N
         Btn_Eliminar.setText("Eliminar");
         Btn_Eliminar.setBorder(null);
         Btn_Eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -107,7 +117,7 @@ DefaultTableModel modelo;
                 Btn_EliminarActionPerformed(evt);
             }
         });
-        add(Btn_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 300, 110, 40));
+        add(Btn_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 270, 170, 40));
 
         txt_consultar.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(252, 178, 1)));
         txt_consultar.addActionListener(new java.awt.event.ActionListener() {
@@ -115,10 +125,12 @@ DefaultTableModel modelo;
                 txt_consultarActionPerformed(evt);
             }
         });
-        add(txt_consultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 520, 40));
+        add(txt_consultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 520, 40));
 
         btn_Consultar1.setBackground(new java.awt.Color(252, 178, 1));
-        btn_Consultar1.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Consultar1.setFont(new java.awt.Font("Arimo", 1, 18)); // NOI18N
+        btn_Consultar1.setForeground(new java.awt.Color(49, 54, 56));
+        btn_Consultar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-buscar-cliente-30.png"))); // NOI18N
         btn_Consultar1.setText("Consultar ID");
         btn_Consultar1.setBorder(null);
         btn_Consultar1.addActionListener(new java.awt.event.ActionListener() {
@@ -126,34 +138,34 @@ DefaultTableModel modelo;
                 btn_Consultar1ActionPerformed(evt);
             }
         });
-        add(btn_Consultar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 130, 110, 40));
+        add(btn_Consultar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 120, 170, 40));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("ID:");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 30, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 30, -1));
 
         txt_id.setEditable(false);
         txt_id.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(252, 178, 1)));
-        add(txt_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 520, 40));
+        add(txt_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 520, 40));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Nombres:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, -1));
 
         txt_Contraseña.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(252, 178, 1)));
         txt_Contraseña.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        add(txt_Contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 520, 40));
+        add(txt_Contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 520, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Apellidos:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 80, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 80, -1));
 
         txt_Apellidos.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(252, 178, 1)));
-        add(txt_Apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, 520, 40));
+        add(txt_Apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 520, 40));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Mail:");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 40, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 40, -1));
 
         txt_email.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(252, 178, 1)));
         txt_email.addActionListener(new java.awt.event.ActionListener() {
@@ -161,11 +173,11 @@ DefaultTableModel modelo;
                 txt_emailActionPerformed(evt);
             }
         });
-        add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, 520, 40));
+        add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 520, 40));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("Telefono:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 430, -1, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, -1, -1));
 
         txt_telefono.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(252, 178, 1)));
         txt_telefono.addActionListener(new java.awt.event.ActionListener() {
@@ -173,7 +185,7 @@ DefaultTableModel modelo;
                 txt_telefonoActionPerformed(evt);
             }
         });
-        add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 430, 520, 40));
+        add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 420, 520, 40));
 
         txt_tipo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(252, 178, 1)));
         txt_tipo.addActionListener(new java.awt.event.ActionListener() {
@@ -181,18 +193,18 @@ DefaultTableModel modelo;
                 txt_tipoActionPerformed(evt);
             }
         });
-        add(txt_tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, 520, 40));
+        add(txt_tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 470, 520, 40));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel8.setText("Tipo:");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 490, 40, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 480, 40, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel9.setText("Contraseña: ");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, -1, -1));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         txt_nombres.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(252, 178, 1)));
-        add(txt_nombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 280, 520, 40));
+        add(txt_nombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 520, 40));
 
         tblEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -202,6 +214,7 @@ DefaultTableModel modelo;
 
             }
         ));
+        tblEmpleados.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblEmpleadosMouseClicked(evt);
@@ -209,7 +222,7 @@ DefaultTableModel modelo;
         });
         jScrollPane1.setViewportView(tblEmpleados);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 540, 860, 300));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 770, 240));
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_GuardarActionPerformed

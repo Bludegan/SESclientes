@@ -50,10 +50,16 @@ public class ComentariosYRating extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         txt_id = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jText_Comentario.setColumns(20);
         jText_Comentario.setRows(5);
         jScrollPane2.setViewportView(jText_Comentario);
+
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, 770, 150));
 
         TableAmbos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -73,21 +79,36 @@ public class ComentariosYRating extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(TableAmbos);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 516, 170));
+
+        btnGuardarComentariosEmpleado.setBackground(new java.awt.Color(252, 178, 1));
+        btnGuardarComentariosEmpleado.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnGuardarComentariosEmpleado.setForeground(new java.awt.Color(49, 54, 56));
+        btnGuardarComentariosEmpleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-guardar-30.png"))); // NOI18N
         btnGuardarComentariosEmpleado.setText("Guardar");
+        btnGuardarComentariosEmpleado.setBorder(null);
         btnGuardarComentariosEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarComentariosEmpleadoActionPerformed(evt);
             }
         });
+        add(btnGuardarComentariosEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 640, 140, 40));
 
+        boxCalificacion.setBackground(new java.awt.Color(252, 178, 1));
+        boxCalificacion.setFont(new java.awt.Font("Arimo", 1, 18)); // NOI18N
+        boxCalificacion.setForeground(new java.awt.Color(49, 54, 56));
         boxCalificacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5 Estrellas", "4 Estrellas", "3 Estrellas", "2 Estrellas", "1 Estrella" }));
+        add(boxCalificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, -1, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Calificacion:");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 420, -1, 20));
 
         jLabel2.setText("De Click para seleccionar y calificar");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, -1, -1));
 
         jLabel4.setText("Comentario:");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 460, 81, 20));
 
         boxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Empleado", "Cliente" }));
         boxTipo.addItemListener(new java.awt.event.ItemListener() {
@@ -95,75 +116,18 @@ public class ComentariosYRating extends javax.swing.JPanel {
                 boxTipoItemStateChanged(evt);
             }
         });
+        add(boxTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 240, 30));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("Tipo:");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
+        add(txt_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, 30, -1));
 
-        jLabel6.setText("id:");
+        jLabel6.setText("ID:");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, -1, 20));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_id, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                        .addGap(237, 237, 237))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(boxCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnGuardarComentariosEmpleado)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(boxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(boxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(boxCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnGuardarComentariosEmpleado)))
-                .addContainerGap(212, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Mensajes (2).png"))); // NOI18N
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, -1, 80));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarComentariosEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarComentariosEmpleadoActionPerformed
@@ -370,6 +334,7 @@ JOptionPane.showMessageDialog(null, "Favor de seleccionar al tipo de persona que
     private javax.swing.JComboBox<String> boxCalificacion;
     private javax.swing.JComboBox<String> boxTipo;
     private javax.swing.JButton btnGuardarComentariosEmpleado;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -35,6 +35,7 @@ public class ControlMensajes {
             ResultSet rs= st.executeQuery(sql);
             while (rs.next()) {                
                 combo.addItem(""+rs.getString("Nombres")+","+rs.getString("Apellidos")+","+rs.getString("Empresa")+","+rs.getString("Email"));
+
             }
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, "Error: "+e.toString());

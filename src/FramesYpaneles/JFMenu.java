@@ -5,6 +5,8 @@
 package FramesYpaneles;
 
 import java.awt.BorderLayout;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -21,7 +23,7 @@ public class JFMenu extends javax.swing.JFrame {
         setLocation(0,0);
         setLocationRelativeTo(this);
         PanelMain.setVisible(false);
-        
+       setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Logo.png")).getImage());
     }
 
     /**
@@ -39,13 +41,13 @@ public class JFMenu extends javax.swing.JFrame {
         btnAdmClientes = new javax.swing.JButton();
         btnMensajes = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu");
         setBackground(new java.awt.Color(255, 255, 255));
-        setMinimumSize(new java.awt.Dimension(1485, 892));
-        setPreferredSize(new java.awt.Dimension(1485, 892));
+        setMinimumSize(new java.awt.Dimension(1275, 808));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -55,14 +57,14 @@ public class JFMenu extends javax.swing.JFrame {
         PanelMain.setLayout(PanelMainLayout);
         PanelMainLayout.setHorizontalGroup(
             PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         PanelMainLayout.setVerticalGroup(
             PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        getContentPane().add(PanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, -40, 1080, 900));
+        getContentPane().add(PanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 890, 810));
 
         btnAdmEmpleados.setFont(new java.awt.Font("Arimo", 1, 18)); // NOI18N
         btnAdmEmpleados.setText("Administrar Empleados");
@@ -74,7 +76,7 @@ public class JFMenu extends javax.swing.JFrame {
                 btnAdmEmpleadosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAdmEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 249, 44));
+        getContentPane().add(btnAdmEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 249, 44));
 
         btnComentarios.setFont(new java.awt.Font("Arimo", 1, 18)); // NOI18N
         btnComentarios.setText("Comentarios y Ratings");
@@ -86,7 +88,7 @@ public class JFMenu extends javax.swing.JFrame {
                 btnComentariosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnComentarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 620, 249, 44));
+        getContentPane().add(btnComentarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 560, 249, 44));
 
         btnAdmClientes.setFont(new java.awt.Font("Arimo", 1, 18)); // NOI18N
         btnAdmClientes.setText("Administrar Clientes");
@@ -98,7 +100,7 @@ public class JFMenu extends javax.swing.JFrame {
                 btnAdmClientesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAdmClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 249, 44));
+        getContentPane().add(btnAdmClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 249, 44));
 
         btnMensajes.setFont(new java.awt.Font("Arimo", 1, 18)); // NOI18N
         btnMensajes.setText("Mensajes Publicitarios");
@@ -110,7 +112,7 @@ public class JFMenu extends javax.swing.JFrame {
                 btnMensajesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnMensajes, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, 249, 44));
+        getContentPane().add(btnMensajes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 460, 249, 44));
 
         btnSalir.setFont(new java.awt.Font("Arimo", 1, 18)); // NOI18N
         btnSalir.setText("Salir");
@@ -122,15 +124,20 @@ public class JFMenu extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 740, 249, 44));
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 660, 249, 44));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Orange (6).png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -10, -1, -1));
+        jLabel2.setForeground(new java.awt.Color(252, 178, 1));
+        jLabel2.setText("© 2023 SESClientes v1.0 ");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 760, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/SES.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 810));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdmClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmClientesActionPerformed
+        PanelMain.setVisible(true);
         AdministrarClientes clientes = new AdministrarClientes();
         clientes.setSize(1008,750);
         clientes.setLocation(0,0);
@@ -142,7 +149,7 @@ public class JFMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdmClientesActionPerformed
 
     private void btnComentariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComentariosActionPerformed
-       
+        PanelMain.setVisible(true);
         ComentariosYRating comentariosYrating = new ComentariosYRating();
         comentariosYrating.setSize(1008,750);
         comentariosYrating.setLocation(0,0);
@@ -159,7 +166,8 @@ public class JFMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnMensajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMensajesActionPerformed
-       MensajesPublicitarios mensajes = new MensajesPublicitarios();
+        PanelMain.setVisible(true);
+        MensajesPublicitarios mensajes = new MensajesPublicitarios();
         mensajes.setSize(1008,750);
         mensajes.setLocation(0,0);
         
@@ -232,5 +240,6 @@ public class JFMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnMensajes;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
