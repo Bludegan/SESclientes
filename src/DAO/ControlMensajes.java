@@ -27,7 +27,7 @@ public class ControlMensajes {
     public IConexionBD conexion = new ConexionBD();
     
     public void RellenarComboBox(JComboBox combo){
-    String sql= "select * from SESclientes.Clientes";
+    String sql= "SELECT * FROM SESclientes.Clientes WHERE Email IS NOT NULL AND Email <> ''";
     Statement st;    
     Connection con=conexion.crearConexion();    
         try {

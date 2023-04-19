@@ -4,12 +4,12 @@
  */
 package FramesYpaneles;
 
-
-
 import DAO.ControlClientes;
 import Negocio.Cliente;
 import java.awt.BorderLayout;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,14 +18,16 @@ import javax.swing.table.DefaultTableModel;
  * @author Carlos
  */
 public class AdministrarClientes extends javax.swing.JPanel {
-ControlClientes control = new  ControlClientes();
-DefaultTableModel modelo;  
+
+    ControlClientes control = new ControlClientes();
+    DefaultTableModel modelo;
+
     /**
      * Creates new form AdministrarClientes
      */
     public AdministrarClientes() {
         initComponents();
-        
+
         modelo = new DefaultTableModel();
         modelo.addColumn("ID");
         modelo.addColumn("Nombres");
@@ -92,7 +94,6 @@ DefaultTableModel modelo;
         btn_Consultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-buscar-cliente-30.png"))); // NOI18N
         btn_Consultar.setText("Consultar ID");
         btn_Consultar.setBorder(null);
-        btn_Consultar.setPreferredSize(new java.awt.Dimension(141, 30));
         btn_Consultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ConsultarActionPerformed(evt);
@@ -206,6 +207,11 @@ DefaultTableModel modelo;
                 txt_nombresActionPerformed(evt);
             }
         });
+        txt_nombres.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_nombresKeyTyped(evt);
+            }
+        });
         add(txt_nombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 530, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -213,6 +219,11 @@ DefaultTableModel modelo;
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 80, -1));
 
         txt_Apellidos.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(252, 178, 1)));
+        txt_Apellidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_ApellidosKeyTyped(evt);
+            }
+        });
         add(txt_Apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 530, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -220,9 +231,19 @@ DefaultTableModel modelo;
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 40, -1));
 
         txt_email.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(252, 178, 1)));
+        txt_email.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_emailFocusLost(evt);
+            }
+        });
         txt_email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_emailActionPerformed(evt);
+            }
+        });
+        txt_email.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_emailKeyTyped(evt);
             }
         });
         add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 380, 530, 20));
@@ -231,6 +252,11 @@ DefaultTableModel modelo;
         txt_telefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_telefonoActionPerformed(evt);
+            }
+        });
+        txt_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_telefonoKeyTyped(evt);
             }
         });
         add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 420, 530, 20));
@@ -245,43 +271,42 @@ DefaultTableModel modelo;
     }//GEN-LAST:event_txt_consultarActionPerformed
 
     private void btn_ConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ConsultarActionPerformed
-    Integer id = Integer.parseInt(this.txt_consultar.getText()) ;
-    Cliente userBuscar =control.buscarCliente(id);
-    DefaultTableModel model= (DefaultTableModel) tblClientes.getModel();
-    int rowCount = model.getRowCount();
-    //Remove rows one by one from the end of the table
-    for (int i = rowCount - 1; i >= 0; i--) {
-    model.removeRow(i);
-    }
+        Integer id = Integer.parseInt(this.txt_consultar.getText());
+        Cliente userBuscar = control.buscarCliente(id);
+        DefaultTableModel model = (DefaultTableModel) tblClientes.getModel();
+        int rowCount = model.getRowCount();
+        //Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
 
-    Object rowData[]=new Object[9];
-    rowData[0]=userBuscar.id;
-    rowData[1]=userBuscar.nombres;
-    rowData[2]=userBuscar.apellidos;
-    rowData[3]=userBuscar.empresa;
-    rowData[4]=userBuscar.email;
-    rowData[5]=userBuscar.telefono;
-    rowData[6]=userBuscar.rfc;
-    rowData[7]=userBuscar.comentarios;
-    rowData[8]=userBuscar.calificacion;
-    model.addRow(rowData); 
+        Object rowData[] = new Object[9];
+        rowData[0] = userBuscar.id;
+        rowData[1] = userBuscar.nombres;
+        rowData[2] = userBuscar.apellidos;
+        rowData[3] = userBuscar.empresa;
+        rowData[4] = userBuscar.email;
+        rowData[5] = userBuscar.telefono;
+        rowData[6] = userBuscar.rfc;
+        rowData[7] = userBuscar.comentarios;
+        rowData[8] = userBuscar.calificacion;
+        model.addRow(rowData);
     }//GEN-LAST:event_btn_ConsultarActionPerformed
 
     private void Btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_GuardarActionPerformed
-       Cliente cliente = new Cliente();
-       cliente.setNombres(txt_nombres.getText());
-       cliente.setApellidos(txt_Apellidos.getText());
-       cliente.setEmpresa(txt_Empresa.getText());
-       cliente.setEmail(txt_email.getText());
-       cliente.setTelefono(Long.parseLong(txt_telefono.getText()));
-       cliente.setRfc(txt_rfc.getText());
-      
-        
-        if(control.insertarCliente(cliente)){
-           JOptionPane.showMessageDialog(null, "Se Agrego con Exito", "Cliente", JOptionPane.INFORMATION_MESSAGE);
-           limpiarCampos();
-        }else{
-           JOptionPane.showMessageDialog(null, "Fallo al guardar", "Cliente", JOptionPane.INFORMATION_MESSAGE);
+        Cliente cliente = new Cliente();
+        cliente.setNombres(txt_nombres.getText());
+        cliente.setApellidos(txt_Apellidos.getText());
+        cliente.setEmpresa(txt_Empresa.getText());
+        cliente.setEmail(txt_email.getText());
+        cliente.setTelefono(Long.parseLong(txt_telefono.getText()));
+        cliente.setRfc(txt_rfc.getText());
+
+        if (control.insertarCliente(cliente)) {
+            JOptionPane.showMessageDialog(null, "Se Agrego con Exito", "Cliente", JOptionPane.INFORMATION_MESSAGE);
+            limpiarCampos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Fallo al guardar", "Cliente", JOptionPane.INFORMATION_MESSAGE);
         }
         actualizarTabla();
     }//GEN-LAST:event_Btn_GuardarActionPerformed
@@ -292,40 +317,39 @@ DefaultTableModel modelo;
     }//GEN-LAST:event_Btn_CancelarActionPerformed
 
     private void Btn_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_EditarActionPerformed
-            Cliente clienteEditar = new Cliente();
-            clienteEditar.setId(Integer.parseInt(txt_id.getText()));
-            clienteEditar.setNombres(txt_nombres.getText());
-            clienteEditar.setApellidos(txt_Apellidos.getText());
-             clienteEditar.setEmpresa(txt_Empresa.getText());
-            clienteEditar.setEmail(txt_email.getText());
-            clienteEditar.setTelefono(Long.parseLong(txt_telefono.getText()));
-            clienteEditar.setRfc(txt_rfc.getText());
+        Cliente clienteEditar = new Cliente();
+        clienteEditar.setId(Integer.parseInt(txt_id.getText()));
+        clienteEditar.setNombres(txt_nombres.getText());
+        clienteEditar.setApellidos(txt_Apellidos.getText());
+        clienteEditar.setEmpresa(txt_Empresa.getText());
+        clienteEditar.setEmail(txt_email.getText());
+        clienteEditar.setTelefono(Long.parseLong(txt_telefono.getText()));
+        clienteEditar.setRfc(txt_rfc.getText());
 
-        
-        if(control.modificarCliente(clienteEditar)){
-           JOptionPane.showMessageDialog(null, "Se Edito con exito", "Cliente", JOptionPane.INFORMATION_MESSAGE);
-           limpiarCampos();
-        }else{
-           JOptionPane.showMessageDialog(null, "Fallo al editar", "Cliente", JOptionPane.INFORMATION_MESSAGE);
+        if (control.modificarCliente(clienteEditar)) {
+            JOptionPane.showMessageDialog(null, "Se Edito con exito", "Cliente", JOptionPane.INFORMATION_MESSAGE);
+            limpiarCampos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Fallo al editar", "Cliente", JOptionPane.INFORMATION_MESSAGE);
         }
         actualizarTabla();
     }//GEN-LAST:event_Btn_EditarActionPerformed
 
     private void Btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_EliminarActionPerformed
-            Cliente clienteEliminar = new Cliente();
-            clienteEliminar.setId(Integer.parseInt(txt_id.getText()));
-            clienteEliminar.setNombres(txt_nombres.getText());
-            clienteEliminar.setApellidos(txt_Apellidos.getText());
-            clienteEliminar.setEmpresa(txt_consultar.getText());
-            clienteEliminar.setEmail(txt_email.getText());
-            clienteEliminar.setTelefono(Long.parseLong(txt_telefono.getText()));
-            clienteEliminar.setRfc(txt_rfc.getText());
-        
-        if(control.eliminarCliente(clienteEliminar)){
-           JOptionPane.showMessageDialog(null, "Se Elimino con Exito", "Cliente", JOptionPane.INFORMATION_MESSAGE);
-           limpiarCampos();
-        }else{
-           JOptionPane.showMessageDialog(null, "Fallo al eliminar", "Cliente", JOptionPane.INFORMATION_MESSAGE);
+        Cliente clienteEliminar = new Cliente();
+        clienteEliminar.setId(Integer.parseInt(txt_id.getText()));
+        clienteEliminar.setNombres(txt_nombres.getText());
+        clienteEliminar.setApellidos(txt_Apellidos.getText());
+        clienteEliminar.setEmpresa(txt_consultar.getText());
+        clienteEliminar.setEmail(txt_email.getText());
+        clienteEliminar.setTelefono(Long.parseLong(txt_telefono.getText()));
+        clienteEliminar.setRfc(txt_rfc.getText());
+
+        if (control.eliminarCliente(clienteEliminar)) {
+            JOptionPane.showMessageDialog(null, "Se Elimino con Exito", "Cliente", JOptionPane.INFORMATION_MESSAGE);
+            limpiarCampos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Fallo al eliminar", "Cliente", JOptionPane.INFORMATION_MESSAGE);
         }
         actualizarTabla();
     }//GEN-LAST:event_Btn_EliminarActionPerformed
@@ -359,6 +383,61 @@ DefaultTableModel modelo;
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_EmpresaActionPerformed
 
+    private void txt_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_telefonoKeyTyped
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!numeros) {
+            evt.consume();
+        }
+
+        if (txt_telefono.getText().trim().length() == 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_telefonoKeyTyped
+
+    private void txt_nombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombresKeyTyped
+        int key = evt.getKeyChar();
+
+        boolean mayusculas = key >= 65 && key <= 90;
+        boolean minusculas = key >= 97 && key <= 122;
+        boolean espacio = key == 32;
+
+        if (!(minusculas || mayusculas || espacio)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_nombresKeyTyped
+
+    private void txt_ApellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_ApellidosKeyTyped
+        int key = evt.getKeyChar();
+
+        boolean mayusculas = key >= 65 && key <= 90;
+        boolean minusculas = key >= 97 && key <= 122;
+        boolean espacio = key == 32;
+
+        if (!(minusculas || mayusculas || espacio)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_ApellidosKeyTyped
+
+    private void txt_emailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_emailKeyTyped
+        
+    }//GEN-LAST:event_txt_emailKeyTyped
+
+    private void txt_emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_emailFocusLost
+       // Definir la expresión regular para validar el correo electrónico
+        String expresionRegular = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
+                                "[a-zA-Z0-9_+&*-]+)*@" + 
+                                "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(expresionRegular);
+        
+        // Validar el correo electrónico
+        Matcher matcher = pattern.matcher(txt_email.getText());
+        if (!matcher.matches()) {
+           JOptionPane.showMessageDialog(null,"El correo no es válido");
+        } 
+    }//GEN-LAST:event_txt_emailFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btn_Cancelar;
@@ -388,26 +467,26 @@ DefaultTableModel modelo;
 
     private void actualizarTabla() {
         List<Cliente> list = control.listarClientes();
-        DefaultTableModel model= (DefaultTableModel) tblClientes.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblClientes.getModel();
         int rowCount = model.getRowCount();
         for (int i = rowCount - 1; i >= 0; i--) {
-          model.removeRow(i);
+            model.removeRow(i);
         }
-        Object rowData[]=new Object[9];
-        for(int i=0; i<list.size();i++){
-            rowData[0]=list.get(i).id;
-            rowData[1]=list.get(i).nombres;
-            rowData[2]=list.get(i).apellidos;
-            rowData[3]=list.get(i).empresa;
-            rowData[4]=list.get(i).email;
-            rowData[5]=list.get(i).telefono;
-            rowData[6]=list.get(i).rfc;
-            rowData[7]=list.get(i).comentarios;
-            rowData[8]=list.get(i).calificacion;
+        Object rowData[] = new Object[9];
+        for (int i = 0; i < list.size(); i++) {
+            rowData[0] = list.get(i).id;
+            rowData[1] = list.get(i).nombres;
+            rowData[2] = list.get(i).apellidos;
+            rowData[3] = list.get(i).empresa;
+            rowData[4] = list.get(i).email;
+            rowData[5] = list.get(i).telefono;
+            rowData[6] = list.get(i).rfc;
+            rowData[7] = list.get(i).comentarios;
+            rowData[8] = list.get(i).calificacion;
             model.addRow(rowData);
         }
     }
-    
+
     private void limpiarCampos() {
         txt_id.setText("");
         txt_nombres.setText("");
@@ -418,5 +497,5 @@ DefaultTableModel modelo;
         txt_rfc.setText("");
         txt_consultar.setText("");
     }
-    
+
 }

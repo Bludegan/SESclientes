@@ -7,6 +7,8 @@ import ConexionBD.IConexionBD;
 import Negocio.Usuario;
 import java.sql.*;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -161,6 +163,11 @@ DefaultTableModel modelo;
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 80, -1));
 
         txt_Apellidos.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(252, 178, 1)));
+        txt_Apellidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_ApellidosKeyTyped(evt);
+            }
+        });
         add(txt_Apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 520, 40));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -168,6 +175,11 @@ DefaultTableModel modelo;
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 40, -1));
 
         txt_email.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(252, 178, 1)));
+        txt_email.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_emailFocusLost(evt);
+            }
+        });
         txt_email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_emailActionPerformed(evt);
@@ -183,6 +195,11 @@ DefaultTableModel modelo;
         txt_telefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_telefonoActionPerformed(evt);
+            }
+        });
+        txt_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_telefonoKeyTyped(evt);
             }
         });
         add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 420, 520, 40));
@@ -204,6 +221,11 @@ DefaultTableModel modelo;
         add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         txt_nombres.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(252, 178, 1)));
+        txt_nombres.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_nombresKeyTyped(evt);
+            }
+        });
         add(txt_nombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 520, 40));
 
         tblEmpleados.setModel(new javax.swing.table.DefaultTableModel(
@@ -373,6 +395,57 @@ DefaultTableModel modelo;
             txt_tipo.setText(tblEmpleados.getValueAt(fila, 5).toString());
         }
     }//GEN-LAST:event_tblEmpleadosMouseClicked
+
+    private void txt_nombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombresKeyTyped
+        int key = evt.getKeyChar();
+
+        boolean mayusculas = key >= 65 && key <= 90;
+        boolean minusculas = key >= 97 && key <= 122;
+        boolean espacio = key == 32;
+
+        if (!(minusculas || mayusculas || espacio)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_nombresKeyTyped
+
+    private void txt_ApellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_ApellidosKeyTyped
+        int key = evt.getKeyChar();
+
+        boolean mayusculas = key >= 65 && key <= 90;
+        boolean minusculas = key >= 97 && key <= 122;
+        boolean espacio = key == 32;
+
+        if (!(minusculas || mayusculas || espacio)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_ApellidosKeyTyped
+
+    private void txt_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_telefonoKeyTyped
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!numeros) {
+            evt.consume();
+        }
+
+        if (txt_telefono.getText().trim().length() == 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_telefonoKeyTyped
+
+    private void txt_emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_emailFocusLost
+        // Definir la expresión regular para validar el correo electrónico
+        String expresionRegular = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
+                                "[a-zA-Z0-9_+&*-]+)*@" + 
+                                "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(expresionRegular);
+        
+        // Validar el correo electrónico
+        Matcher matcher = pattern.matcher(txt_email.getText());
+        if (!matcher.matches()) {
+           JOptionPane.showMessageDialog(null,"El correo no es válido");
+        }
+    }//GEN-LAST:event_txt_emailFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
