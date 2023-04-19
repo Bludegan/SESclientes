@@ -118,6 +118,11 @@ public class AdministrarClientes extends javax.swing.JPanel {
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 460, 50, -1));
 
         txt_rfc.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(252, 178, 1)));
+        txt_rfc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_rfcActionPerformed(evt);
+            }
+        });
         add(txt_rfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 470, 530, -1));
 
         Btn_Guardar.setBackground(new java.awt.Color(252, 178, 1));
@@ -438,6 +443,10 @@ public class AdministrarClientes extends javax.swing.JPanel {
         } 
     }//GEN-LAST:event_txt_emailFocusLost
 
+    private void txt_rfcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_rfcActionPerformed
+        validarRFC(txt_rfc.getText());
+    }//GEN-LAST:event_txt_rfcActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btn_Cancelar;
@@ -486,7 +495,40 @@ public class AdministrarClientes extends javax.swing.JPanel {
             model.addRow(rowData);
         }
     }
+ public static boolean validarRFC(String rfc) {
+    if (rfc.length() != 12 && rfc.length() != 13) {
+        return false; // Verificar longitud del RFC
+    }
+    
+    String regex = "[A-Z]{4}[0-9]{6}[A-Z0-9]{3}"; // Expresión regular para el formato del RFC
+    if (!rfc.matches(regex)) {
+        return false; // Verificar formato del RFC
+    }
+    
+    // Verificar el último dígito del RFC
+    char lastChar = rfc.charAt(rfc.length() - 1);
+    char calculatedChar = calcularDigitoVerificador(rfc.substring(0, rfc.length() - 1));
+    return lastChar == calculatedChar;
+}
 
+private static char calcularDigitoVerificador(String rfc) {
+    int sum = 0;
+    int[] weights = { 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+    for (int i = 0; i < rfc.length(); i++) {
+        char c = rfc.charAt(i);
+        int value = Character.isLetter(c) ? c - 'A' + 10 : c - '0';
+        sum += value * weights[i];
+    }
+    int remainder = 11 - (sum % 11);
+    if (remainder == 10) {
+        return 'A';
+    } else if (remainder == 11) {
+        return '0';
+    } else {
+        return (char) (remainder + '0');
+    }
+}
+    
     private void limpiarCampos() {
         txt_id.setText("");
         txt_nombres.setText("");

@@ -6,6 +6,7 @@ package FramesYpaneles;
 import DAO.ControlComentariosRatings;
 import Negocio.Cliente;
 import Negocio.Usuario;
+import java.awt.TextArea;
 import java.awt.event.ItemEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -121,6 +122,12 @@ public class ComentariosYRating extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("Tipo:");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
+
+        txt_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_idActionPerformed(evt);
+            }
+        });
         add(txt_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, 30, -1));
 
         jLabel6.setText("ID:");
@@ -132,15 +139,25 @@ public class ComentariosYRating extends javax.swing.JPanel {
 
     private void btnGuardarComentariosEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarComentariosEmpleadoActionPerformed
         if (this.boxTipo.getSelectedItem().equals("Empleado")) {
-               ComentarioYCalificacionEmpleado();
-               limpíarCampos();
-            }else if(this.boxTipo.getSelectedItem().equals("Cliente")){
-               ComentarioYCalificacionClientes();
+            if (validarID(txt_id.getText())) {
+                if (validarTextArea(jText_Comentario.getText())) {
+                    ComentarioYCalificacionEmpleado();
+                }
+            }
+            limpíarCampos();
+        } else if (this.boxTipo.getSelectedItem().equals("Cliente")) {
+            if (validarID(txt_id.getText())) {
+                if (validarTextArea(jText_Comentario.getText())) {
+                    ComentarioYCalificacionClientes();
+                }
+            }
+
                limpíarCampos();
             }else if(this.boxTipo.getSelectedItem().equals("Seleccionar")){
                ComentarioYCalificacionSeleciconar();
                limpíarCampos();
             }
+        
         
         
         
@@ -218,6 +235,10 @@ public class ComentariosYRating extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_TableAmbosMouseClicked
+
+    private void txt_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_idActionPerformed
     
 public void consultarEmpleados(){
     modelo = new DefaultTableModel();
@@ -312,6 +333,7 @@ public void ComentarioYCalificacionClientes(){
             cliente.setComentarios(jText_Comentario.getText());
             cliente.setCalificacion(boxCalificacion.getSelectedItem().toString());
             
+            
 
         if(control.CalificarYComentarCliente(cliente)){
            JOptionPane.showMessageDialog(null, "Se Califico con exito al Cliente", "Cliente", JOptionPane.INFORMATION_MESSAGE);
@@ -329,6 +351,22 @@ JOptionPane.showMessageDialog(null, "Favor de seleccionar al tipo de persona que
         this.jText_Comentario.setText("");
         this.boxCalificacion.setSelectedIndex(0);
     }
+ public static boolean validarTextArea(String textArea) {
+    String contenido = textArea;
+    if (contenido.isEmpty()) {
+       JOptionPane.showMessageDialog(null, "El espacio no debe quedar en blanco");
+        return false;
+    }
+    return true;
+}
+  public static boolean validarID(String id) {
+    String contenido = id;
+    if (contenido.isEmpty()) {
+       JOptionPane.showMessageDialog(null, "Favor de seleccionar a un usuario de la lista.");
+        return false;
+    }
+    return true;
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TableAmbos;
     private javax.swing.JComboBox<String> boxCalificacion;
