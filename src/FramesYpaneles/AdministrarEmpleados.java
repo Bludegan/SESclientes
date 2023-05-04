@@ -248,22 +248,35 @@ DefaultTableModel modelo;
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_GuardarActionPerformed
-       Usuario usuario = new Usuario();
-       usuario.setContraseña(txt_Contraseña.getText());
-       usuario.setNombres(txt_nombres.getText());
-       usuario.setApellidos(txt_Apellidos.getText());
-       usuario.setEmail(txt_email.getText());
-       usuario.setTelefono(Long.parseLong(txt_telefono.getText()));
-       usuario.setTipo(txt_tipo.getText());
+      
+        if (validarText(txt_Contraseña.getText())) {
+            if (validarText(txt_nombres.getText())) {
+                if (validarText(txt_Apellidos.getText())) {
+                    if (validarID(txt_tipo.getText())) {
+                            Usuario usuario = new Usuario();
+                            usuario.setContraseña(txt_Contraseña.getText());
+                            usuario.setNombres(txt_nombres.getText());
+                            usuario.setApellidos(txt_Apellidos.getText());
+                            usuario.setEmail(txt_email.getText());
+                            usuario.setTelefono(Long.parseLong(txt_telefono.getText()));
+                            usuario.setTipo(txt_tipo.getText());
       
         
-        if(control.insertarUsuario(usuario)){
-           JOptionPane.showMessageDialog(null, "Se Agrego con Exito", "Usuario", JOptionPane.INFORMATION_MESSAGE);
-           limpiarCampos();
-        }else{
-           JOptionPane.showMessageDialog(null, "Fallo al guardar", "Usuario", JOptionPane.INFORMATION_MESSAGE);
+                            if(control.insertarUsuario(usuario)){
+                               JOptionPane.showMessageDialog(null, "Se Agrego con Exito", "Usuario", JOptionPane.INFORMATION_MESSAGE);
+                               limpiarCampos();
+                            }else{
+                               JOptionPane.showMessageDialog(null, "Fallo al guardar", "Usuario", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                            actualizarTabla();     
+                    }
+                }
+            }
         }
-        actualizarTabla();
+        
+       
+                            
+        
     }//GEN-LAST:event_Btn_GuardarActionPerformed
 
     private void Btn_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_CancelarActionPerformed
@@ -272,6 +285,11 @@ DefaultTableModel modelo;
     }//GEN-LAST:event_Btn_CancelarActionPerformed
 
     private void Btn_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_EditarActionPerformed
+           
+        if (validarText(txt_Contraseña.getText())) {
+            if (validarText(txt_nombres.getText())) {
+                if (validarText(txt_Apellidos.getText())) {
+                    if (validarID(txt_tipo.getText())) {
             Usuario usuarioEditar = new Usuario();
             usuarioEditar.setId(Integer.parseInt(txt_id.getText()));
             usuarioEditar.setContraseña(txt_Contraseña.getText());
@@ -289,9 +307,17 @@ DefaultTableModel modelo;
            JOptionPane.showMessageDialog(null, "Fallo al editar", "Usuario", JOptionPane.INFORMATION_MESSAGE);
         }
         actualizarTabla();
+                    }
+                }
+            }
+        }
+        
+        
+            
     }//GEN-LAST:event_Btn_EditarActionPerformed
 
     private void Btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_EliminarActionPerformed
+       if (validarID(txt_id.getText())) {
             Usuario usuarioEliminar = new Usuario();
             usuarioEliminar.setId(Integer.parseInt(txt_id.getText()));
             usuarioEliminar.setContraseña(txt_Contraseña.getText());
@@ -301,13 +327,15 @@ DefaultTableModel modelo;
             usuarioEliminar.setTelefono(Long.parseLong(txt_telefono.getText()));
             usuarioEliminar.setTipo(txt_tipo.getText());
         
-        if(control.eliminarUsuario(usuarioEliminar)){
-           JOptionPane.showMessageDialog(null, "Se Elimino con Exito", "Usuario", JOptionPane.INFORMATION_MESSAGE);
-           limpiarCampos();
-        }else{
-           JOptionPane.showMessageDialog(null, "Fallo al eliminar", "Usuario", JOptionPane.INFORMATION_MESSAGE);
+            if(control.eliminarUsuario(usuarioEliminar)){
+               JOptionPane.showMessageDialog(null, "Se Elimino con Exito", "Usuario", JOptionPane.INFORMATION_MESSAGE);
+               limpiarCampos();
+            }else{
+               JOptionPane.showMessageDialog(null, "Fallo al eliminar", "Usuario", JOptionPane.INFORMATION_MESSAGE);
+            }
+            actualizarTabla();
         }
-        actualizarTabla();
+        
 
     }//GEN-LAST:event_Btn_EliminarActionPerformed
 
@@ -317,25 +345,32 @@ DefaultTableModel modelo;
     }//GEN-LAST:event_txt_consultarActionPerformed
 
     private void btn_Consultar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Consultar1ActionPerformed
-    Integer id = Integer.parseInt(this.txt_consultar.getText()) ;
-    Usuario userBuscar =control.buscarUsuario(id);
-    DefaultTableModel model= (DefaultTableModel) tblEmpleados.getModel();
-    int rowCount = model.getRowCount();
-    //Remove rows one by one from the end of the table
-    for (int i = rowCount - 1; i >= 0; i--) {
-    model.removeRow(i);
-    }
 
-    Object rowData[]=new Object[8];
-    rowData[0]=userBuscar.id;
-    rowData[1]=userBuscar.nombres;
-    rowData[2]=userBuscar.apellidos;
-    rowData[3]=userBuscar.email;
-    rowData[4]=userBuscar.telefono;
-    rowData[5]=userBuscar.tipo;
-    rowData[6]=userBuscar.comentarios;
-    rowData[7]=userBuscar.calificacion;
-    model.addRow(rowData); 
+        if (validarID(txt_id.getText())) {
+            Integer id = Integer.parseInt(this.txt_consultar.getText()) ;
+            Usuario userBuscar =control.buscarUsuario(id);
+            DefaultTableModel model= (DefaultTableModel) tblEmpleados.getModel();
+            int rowCount = model.getRowCount();
+            //Remove rows one by one from the end of the table
+            for (int i = rowCount - 1; i >= 0; i--) {
+            model.removeRow(i);
+            }
+
+            Object rowData[]=new Object[8];
+            rowData[0]=userBuscar.id;
+            rowData[1]=userBuscar.nombres;
+            rowData[2]=userBuscar.apellidos;
+            rowData[3]=userBuscar.email;
+            rowData[4]=userBuscar.telefono;
+            rowData[5]=userBuscar.tipo;
+            rowData[6]=userBuscar.comentarios;
+            rowData[7]=userBuscar.calificacion;
+            model.addRow(rowData); 
+        }
+        
+    
+    
+    
     }//GEN-LAST:event_btn_Consultar1ActionPerformed
 
     private void actualizarTabla() {
@@ -473,4 +508,22 @@ DefaultTableModel modelo;
     private javax.swing.JTextField txt_telefono;
     private javax.swing.JTextField txt_tipo;
     // End of variables declaration//GEN-END:variables
+
+    public static boolean validarText(String textArea) {
+    String contenido = textArea;
+    if (contenido.isEmpty()) {
+       JOptionPane.showMessageDialog(null, "El espacio no debe quedar en blanco");
+        return false;
+    }
+    return true;
+}
+  public static boolean validarID(String id) {
+    String contenido = id;
+    if (contenido.isEmpty()) {
+       JOptionPane.showMessageDialog(null, "Favor de seleccionar a un Empleado de la lista.");
+        return false;
+    }
+    return true;
+}
+
 }

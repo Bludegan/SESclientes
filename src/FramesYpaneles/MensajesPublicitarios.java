@@ -10,6 +10,7 @@ import javax.mail.MessagingException;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -272,23 +273,24 @@ public static String adjunto = "";
     }//GEN-LAST:event_btnEliminarListaActionPerformed
 
     private void btnEnviarMensajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarMensajeActionPerformed
-    for (int i = 0; i < tblClientes.getRowCount(); i++) {
-        
-        String asunto = txt_Asunto.getText();
-        String mensaje = TA_Mensaje.getText()+"\n\n\n\nCorreo: sesobregon@hotmail.com\nTeléfono: 644 415 4422\nPagina web: https://soldadurasessonora.com/ \nDirección del local: C. Sufragio Efectivo 240-Local B, Centro, Cajeme, 85000 Cd Obregón, Son.";
-        String correoDestino = (String) tblClientes.getValueAt(i, 3);
-        String rutaArchivo = lbl_Adjunto.getText();
-        try {
-            // Enviar el mensaje de correo electrónico
-            control.enviarMensaje(asunto, mensaje, correoDestino,rutaArchivo);
-        } catch (MessagingException e) {
-            JOptionPane.showMessageDialog(null, "No se pudo enviar el correo. Error: " + e.toString());
+
+        if (ValidacionTabla(tblClientes)) {
+            for (int i = 0; i < tblClientes.getRowCount(); i++) {
+            String asunto = txt_Asunto.getText();
+            String mensaje = TA_Mensaje.getText()+"\n\n\n\nCorreo: sesobregon@hotmail.com\nTeléfono: 644 415 4422\nPagina web: https://soldadurasessonora.com/ \nDirección del local: C. Sufragio Efectivo 240-Local B, Centro, Cajeme, 85000 Cd Obregón, Son.";
+            String correoDestino = (String) tblClientes.getValueAt(i, 3);
+            String rutaArchivo = lbl_Adjunto.getText();
+            try {
+                // Enviar el mensaje de correo electrónico
+                control.enviarMensaje(asunto, mensaje, correoDestino,rutaArchivo);
+            } catch (MessagingException e) {
+                JOptionPane.showMessageDialog(null, "No se pudo enviar el correo. Error: " + e.toString());
+            }
         }
-    
-    
-    
-    }
-    limpiarCampos();
+        limpiarCampos();
+        }
+        
+        
     
     }//GEN-LAST:event_btnEnviarMensajeActionPerformed
 
@@ -357,7 +359,13 @@ JFileChooser fc = new JFileChooser();
     private javax.swing.JTextField txt_Asunto;
     // End of variables declaration//GEN-END:variables
 
+   public static boolean ValidacionTabla(JTable tabla){
    
-
+    if (tabla.getRowCount() == 0) {
+        JOptionPane.showMessageDialog(null, "La tabla está vacía. Por favor, seleccione a los usuarios que desea enviar un correo.");
+        return false;
+    }
+    return true;
+   }
  
 }

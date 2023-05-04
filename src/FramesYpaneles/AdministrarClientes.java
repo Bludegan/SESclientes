@@ -276,44 +276,59 @@ public class AdministrarClientes extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_consultarActionPerformed
 
     private void btn_ConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ConsultarActionPerformed
-        Integer id = Integer.parseInt(this.txt_consultar.getText());
-        Cliente userBuscar = control.buscarCliente(id);
-        DefaultTableModel model = (DefaultTableModel) tblClientes.getModel();
-        int rowCount = model.getRowCount();
-        //Remove rows one by one from the end of the table
-        for (int i = rowCount - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
+        if (validarID(txt_id.getText())) {
+            Integer id = Integer.parseInt(this.txt_consultar.getText());
+            Cliente userBuscar = control.buscarCliente(id);
+            DefaultTableModel model = (DefaultTableModel) tblClientes.getModel();
+            int rowCount = model.getRowCount();
+            //Remove rows one by one from the end of the table
+            for (int i = rowCount - 1; i >= 0; i--) {
+                model.removeRow(i);
+            }
 
-        Object rowData[] = new Object[9];
-        rowData[0] = userBuscar.id;
-        rowData[1] = userBuscar.nombres;
-        rowData[2] = userBuscar.apellidos;
-        rowData[3] = userBuscar.empresa;
-        rowData[4] = userBuscar.email;
-        rowData[5] = userBuscar.telefono;
-        rowData[6] = userBuscar.rfc;
-        rowData[7] = userBuscar.comentarios;
-        rowData[8] = userBuscar.calificacion;
-        model.addRow(rowData);
+            Object rowData[] = new Object[9];
+            rowData[0] = userBuscar.id;
+            rowData[1] = userBuscar.nombres;
+            rowData[2] = userBuscar.apellidos;
+            rowData[3] = userBuscar.empresa;
+            rowData[4] = userBuscar.email;
+            rowData[5] = userBuscar.telefono;
+            rowData[6] = userBuscar.rfc;
+            rowData[7] = userBuscar.comentarios;
+            rowData[8] = userBuscar.calificacion;
+            model.addRow(rowData);
+        }
+        
+        
     }//GEN-LAST:event_btn_ConsultarActionPerformed
 
     private void Btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_GuardarActionPerformed
-        Cliente cliente = new Cliente();
-        cliente.setNombres(txt_nombres.getText());
-        cliente.setApellidos(txt_Apellidos.getText());
-        cliente.setEmpresa(txt_Empresa.getText());
-        cliente.setEmail(txt_email.getText());
-        cliente.setTelefono(Long.parseLong(txt_telefono.getText()));
-        cliente.setRfc(txt_rfc.getText());
+        
+        if (validarText(txt_nombres.getText())) {
+            if (validarText(txt_Apellidos.getText())) {
+                if (validarText(txt_Empresa.getText())) {
+                    if (validarID(txt_rfc.getText())) {
+                        Cliente cliente = new Cliente();
+                        cliente.setNombres(txt_nombres.getText());
+                        cliente.setApellidos(txt_Apellidos.getText());
+                        cliente.setEmpresa(txt_Empresa.getText());
+                        cliente.setEmail(txt_email.getText());
+                        cliente.setTelefono(Long.parseLong(txt_telefono.getText()));
+                        cliente.setRfc(txt_rfc.getText());
 
-        if (control.insertarCliente(cliente)) {
-            JOptionPane.showMessageDialog(null, "Se Agrego con Exito", "Cliente", JOptionPane.INFORMATION_MESSAGE);
-            limpiarCampos();
-        } else {
-            JOptionPane.showMessageDialog(null, "Fallo al guardar", "Cliente", JOptionPane.INFORMATION_MESSAGE);
+                        if (control.insertarCliente(cliente)) {
+                            JOptionPane.showMessageDialog(null, "Se Agrego con Exito", "Cliente", JOptionPane.INFORMATION_MESSAGE);
+                            limpiarCampos();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Fallo al guardar", "Cliente", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        actualizarTabla();
+                    }
+                }
+            }
         }
-        actualizarTabla();
+        
+        
     }//GEN-LAST:event_Btn_GuardarActionPerformed
 
     private void Btn_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_CancelarActionPerformed
@@ -322,25 +337,39 @@ public class AdministrarClientes extends javax.swing.JPanel {
     }//GEN-LAST:event_Btn_CancelarActionPerformed
 
     private void Btn_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_EditarActionPerformed
-        Cliente clienteEditar = new Cliente();
-        clienteEditar.setId(Integer.parseInt(txt_id.getText()));
-        clienteEditar.setNombres(txt_nombres.getText());
-        clienteEditar.setApellidos(txt_Apellidos.getText());
-        clienteEditar.setEmpresa(txt_Empresa.getText());
-        clienteEditar.setEmail(txt_email.getText());
-        clienteEditar.setTelefono(Long.parseLong(txt_telefono.getText()));
-        clienteEditar.setRfc(txt_rfc.getText());
+        
+        if (validarText(txt_nombres.getText())) {
+            if (validarText(txt_Apellidos.getText())) {
+                if (validarText(txt_Empresa.getText())) {
+                    if (validarID(txt_rfc.getText())) {
+                        Cliente clienteEditar = new Cliente();
+                        clienteEditar.setId(Integer.parseInt(txt_id.getText()));
+                        clienteEditar.setNombres(txt_nombres.getText());
+                        clienteEditar.setApellidos(txt_Apellidos.getText());
+                        clienteEditar.setEmpresa(txt_Empresa.getText());
+                        clienteEditar.setEmail(txt_email.getText());
+                        clienteEditar.setTelefono(Long.parseLong(txt_telefono.getText()));
+                        clienteEditar.setRfc(txt_rfc.getText());
 
-        if (control.modificarCliente(clienteEditar)) {
-            JOptionPane.showMessageDialog(null, "Se Edito con exito", "Cliente", JOptionPane.INFORMATION_MESSAGE);
-            limpiarCampos();
-        } else {
-            JOptionPane.showMessageDialog(null, "Fallo al editar", "Cliente", JOptionPane.INFORMATION_MESSAGE);
+                        if (control.modificarCliente(clienteEditar)) {
+                            JOptionPane.showMessageDialog(null, "Se Edito con exito", "Cliente", JOptionPane.INFORMATION_MESSAGE);
+                            limpiarCampos();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Fallo al editar", "Cliente", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        actualizarTabla();
+                    }
+                }
+            }
         }
-        actualizarTabla();
+        
+        
+        
+        
     }//GEN-LAST:event_Btn_EditarActionPerformed
 
     private void Btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_EliminarActionPerformed
+        if (validarID(txt_id.getText())) {
         Cliente clienteEliminar = new Cliente();
         clienteEliminar.setId(Integer.parseInt(txt_id.getText()));
         clienteEliminar.setNombres(txt_nombres.getText());
@@ -357,6 +386,9 @@ public class AdministrarClientes extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Fallo al eliminar", "Cliente", JOptionPane.INFORMATION_MESSAGE);
         }
         actualizarTabla();
+        }
+
+        
     }//GEN-LAST:event_Btn_EliminarActionPerformed
 
     private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
@@ -540,4 +572,21 @@ private static char calcularDigitoVerificador(String rfc) {
         txt_consultar.setText("");
     }
 
+     public static boolean validarText(String textArea) {
+    String contenido = textArea;
+    if (contenido.isEmpty()) {
+       JOptionPane.showMessageDialog(null, "El espacio no debe quedar en blanco");
+        return false;
+    }
+    return true;
+}
+  public static boolean validarID(String id) {
+    String contenido = id;
+    if (contenido.isEmpty()) {
+       JOptionPane.showMessageDialog(null, "Favor de seleccionar a un usuario de la lista.");
+        return false;
+    }
+    return true;
+}
+    
 }
